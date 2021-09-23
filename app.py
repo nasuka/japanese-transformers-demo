@@ -10,12 +10,12 @@ from logger import get_module_logger
 
 LOGGER = get_module_logger(__name__)
 HUGGINGFACE_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
-LOGGER.info(HUGGINGFACE_API_TOKEN)
 HUGGINGFACE_API_URL = (
     "https://api-inference.huggingface.co/models/joeddav/xlm-roberta-large-xnli"
 )
 
 
+@st.cache
 def query_inference_api(request_body: Dict[str, Any]) -> Dict[str, Any]:
     headers = {"Authorization": f"Bearer {HUGGINGFACE_API_TOKEN}"}
     data = json.dumps(request_body)
